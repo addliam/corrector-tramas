@@ -4,25 +4,37 @@ import AlgoritmoDden from "./algoritmos/AlgoritmoDden";
 import AlgoritmoDfar from "./algoritmos/AlgoritmoDfar";
 import { Corrector } from "./algoritmos/interface/Corrector";
 class ServicioCorreccion {
-  // patron Facade
-  //   contenido seria  array/vector de str
-  // sustento d este patron seria q no quiero mezclar logica de obtener tipo, con la de corregir
+  // patron Strategy o Abstract Factory por el metodo determinarTipo
+  private corrector: Corrector;
   private contenido: string[][];
-  constructor(contenido: string[][]) {
-    this.contenido = contenido;
+  constructor(corrector: Corrector) {
+    this.corrector = corrector;
   }
 
-  public usarAlgoritmoDser(): string[][] {
-    return new AlgoritmoDser().corregir(this.contenido);
-  }
-  public usarAlgoritmoDfar(): string[][] {
-    return new AlgoritmoDfar().corregir(this.contenido);
-  }
-  public usarAlgoritmoDfac(): string[][] {
-    return new AlgoritmoDfac().corregir(this.contenido);
-  }
-  public usarAlgoritmoDden(): string[][] {
-    return new AlgoritmoDden().corregir(this.contenido);
+  private static calcularTipo = (nombreArchivo: string): string => {
+    return "";
+  };
+
+  public static determinarTipo(nombreArchivo: string): Corrector {
+    let tipo: string = this.calcularTipo(nombreArchivo);
+    switch (tipo) {
+      case "DSER":
+        return new AlgoritmoDser();
+        break;
+      case "DFAR":
+        return new AlgoritmoDfar();
+        break;
+      case "DFAC":
+        return new AlgoritmoDfac();
+        break;
+      case "DDEN":
+        return new AlgoritmoDden();
+        break;
+      default:
+        console.log("Tipo no encontrado!");
+        throw new Error("No se pudo determinar el tipo de archivo.");
+        break;
+    }
   }
 }
 export default ServicioCorreccion;
