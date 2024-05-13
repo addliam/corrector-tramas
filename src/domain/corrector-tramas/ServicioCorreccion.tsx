@@ -1,15 +1,15 @@
-import { CorrectorFactoryImpl } from "./CorrectorFactoryImpl";
 import { Corrector } from "./interface/Corrector";
+import { CorrectorFactory } from "./interface/CorrectorFactory";
 
 export class ServicioCorreccion {
-  private correctorFactoryImpl: CorrectorFactoryImpl;
+  private correctorFactory: CorrectorFactory;
 
-  constructor(correctorFactoryImpl: CorrectorFactoryImpl) {
-    this.correctorFactoryImpl = correctorFactoryImpl;
+  constructor(correctorFactory: CorrectorFactory) {
+    this.correctorFactory = correctorFactory;
   }
   public corregir(contenido: string, nombreArchivo: string): string {
     const corrector: Corrector & Parser =
-      this.correctorFactoryImpl.crearCorrector(nombreArchivo);
+      this.correctorFactory.crearCorrector(nombreArchivo);
     let matrixContenido: string[][] = corrector.parsearEntrada(contenido);
     let matrixCorregida: string[][] = corrector.corregir(matrixContenido);
     let contenidoSalida: string = corrector.parsearSalida(matrixCorregida);
