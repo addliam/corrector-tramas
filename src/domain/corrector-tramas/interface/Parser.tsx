@@ -7,7 +7,7 @@ export abstract class Parser {
     // Gestionar eliminacion de (\r) carriage return. .replace(/\r/g, "")
     texto = texto.replace(/\r/g, "");
     // some logic
-    console.log(`Usando en parsearEntrada: ${this.offsetsEntrada.join(" , ")}`);
+    // console.log(`Usando en parsearEntrada: ${this.offsetsEntrada.join(" , ")}`);
     // primer espacio, ancho de columna
     const OFFSET_PRIMER_ESPACIO = this.offsetsEntrada[0];
     // Uso exclusivo para DSER
@@ -23,7 +23,6 @@ export abstract class Parser {
         let segundoCampo = linea
           .substring(OFFSET_PRIMER_ESPACIO, OFFSET_PRIMER_SEGUNDO)
           .trim();
-        // console.log(JSON.stringify(segundoCampo));
         linea = linea.substring(OFFSET_PRIMER_SEGUNDO);
         // no permitir vacio, por def tendra un [''] del primer Campo
         let fl = [
@@ -53,8 +52,7 @@ export abstract class Parser {
   };
 
   public parsearSalida = (matrix: string[][]): string => {
-    // some logic
-    console.log(`Usando en parsearSalida: ${this.offsetsSalida.join(" , ")}`);
+    // console.log(`Usando en parsearSalida: ${this.offsetsSalida.join(" , ")}`);
     // Ejemplo:
     // 425   2.001
     //    xxxxxxxx
@@ -92,10 +90,10 @@ export abstract class Parser {
           linea += arrayLinea[i] + " ".repeat(cantidadEspacios);
         }
       }
-      // console.log(linea);
-      arraySalida.push(linea);
+      if (linea.trim() !== "") {
+        arraySalida.push(linea);
+      }
     });
-    //   console.log(arraySalida.join(","));
     return arraySalida.join("\n");
   };
 }

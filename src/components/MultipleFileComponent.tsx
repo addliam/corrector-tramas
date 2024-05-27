@@ -1,46 +1,64 @@
 import { useState, useEffect } from "react";
 import { ServicioCorreccion } from "../domain/corrector-tramas/ServicioCorreccion";
-import { CorrectorFactoryImpl } from "../domain/corrector-tramas/CorrectorFactoryImpl";
-
+// importacion algoritmos
+import { Corrector } from "../domain/corrector-tramas/interface/Corrector";
+import { Parser } from "../domain/corrector-tramas/interface/Parser";
+import { calcularTipoAlgoritmo } from "../domain/corrector-tramas/CalcularTipoAlgoritmo";
+import { TipoAlgoritmo } from "../domain/corrector-tramas/interface/TipoAlgoritmo";
+import { Trama } from "../domain/corrector-tramas/interface/Trama";
+import TextAreaEditor from "./TextAreaEditor";
 interface FileItem {
   filename: string;
   content: string | ArrayBuffer | null;
 }
 
-const MainFilesHandler = (files: FileItem[]) => {
-  // 1. Identificar tipo archivo (de los 4 o 5)
-  // 2. Usar la funcion correspondiente por cada tipo archivo
-  // Recorrer los files para crear un corrector con algoritmo segun corresponda
-  files.map((file: FileItem) => {
-    let servicioCorreccion: ServicioCorreccion = new ServicioCorreccion(
-      new CorrectorFactoryImpl()
-    );
-    let contenidoCorregido: string = servicioCorreccion.corregir(
-      String(file.content),
-      file.filename
-    );
-    console.log("contenidoCorregido");
-    console.log(contenidoCorregido);
-    // let correctorFactory: CorrectorFactoryImpl = new CorrectorFactoryImpl();
-    // // la fabrica elige el corrector de acuerdo al nombre del archivo, osea el tipo
-    // let correctorEspecifico: Corrector = correctorFactory.crearCorrector(
-    //   file.filename
-    // );
-    // let servicioCorreccion: ServicioCorreccion = new ServicioCorreccion(correctorEspecifico);
-  });
-};
-
 export const MultipleFileComponent = () => {
   const [arrayFileItems, setArrayFileItems] = useState<FileItem[]>([]);
+  // const [entradaTramas, setEntradaTramas] = useState<Trama[]>([]);
+  const [salidaTramas, setSalidaTramas] = useState<Trama[]>([]);
 
   useEffect(() => {
-    // Mostrar informacion de archivos
-    // arrayFileItems.map((file: FileItem) => {
-    //   console.log(file.filename);
-    // });
     MainFilesHandler(arrayFileItems);
     return () => {};
   }, [arrayFileItems]);
+  useEffect(() => {
+    salidaTramas.map((salidaTrama: Trama) => {
+      console.log({ salidaTrama });
+    });
+
+    return () => {};
+  }, [salidaTramas]);
+
+  const MainFilesHandler = (files: FileItem[]) => {
+    // 1. Identificar tipo archivo (de los 4 o 5)
+    // 2. Usar la funcion correspondiente por cada tipo archivo
+    // Recorrer los files para crear un corrector con algoritmo segun corresponda
+    files.map((file: FileItem) => {
+      const tramaTipoyAlgoritmo: TipoAlgoritmo = calcularTipoAlgoritmo(
+        file.filename
+      );
+      const tipoTrama: string = tramaTipoyAlgoritmo.tipo;
+      const algoritmoTrama: Corrector & Parser = tramaTipoyAlgoritmo.algoritmo;
+      const contenidoArchivoString: string = String(file.content);
+      // Iniciar servicio correccion con algoritmo especifico
+      // apendizar a lista existente
+      const servicioCorreccion = new ServicioCorreccion(algoritmoTrama);
+      const contenidoCorregido = servicioCorreccion.corregir(
+        contenidoArchivoString
+      );
+      console.log("contenidoCorregido: ");
+      console.log(contenidoCorregido);
+      // Agregar trama a lista de tramas corregidas, osea salida
+      setSalidaTramas((prev) => [
+        ...prev,
+        {
+          tipo: tipoTrama,
+          contenido: contenidoCorregido,
+          nombreArchivo: file.filename,
+        },
+      ]);
+    });
+  };
 
   const handleFileChosen = async (event: any) => {
     // Convert the FileList into an array and iterate
@@ -74,6 +92,19 @@ export const MultipleFileComponent = () => {
         accept=".txt"
         onChange={(e) => handleFileChosen(e)}
       />
+      <div id="mainbody">
+        {salidaTramas.length > 0 &&
+          salidaTramas.map((trama: Trama, indx: number) => (
+            <TextAreaEditor
+              key={`KEY-${indx}.${trama.nombreArchivo}`}
+              contenido={trama.contenido}
+              tipo={trama.tipo}
+              nombreArchivo={trama.nombreArchivo}
+            />
+          ))}
+      </div>
+      {/* O haces un componente grande, que necesites solo pasar salidaTramas state, 
+      O un state compartido de padre a hijo (callback) por cada tipo de trama */}
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import { Corrector } from "../interface/Corrector";
-import { Parser } from "../Parser";
+import { Parser } from "../interface/Parser";
 
 class AlgoritmoDate extends Parser implements Corrector {
   offsetsEntrada = [39];

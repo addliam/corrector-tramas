@@ -1,5 +1,5 @@
 import { Corrector } from "../interface/Corrector";
-import { Parser } from "../Parser";
+import { Parser } from "../interface/Parser";
 
 class AlgoritmoDser extends Parser implements Corrector {
   offsetsEntrada = [50, 74];

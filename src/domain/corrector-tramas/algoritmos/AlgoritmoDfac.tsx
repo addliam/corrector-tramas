@@ -1,5 +1,5 @@
 import { Corrector } from "../interface/Corrector";
-import { Parser } from "../Parser";
+import { Parser } from "../interface/Parser";
 
 class AlgoritmoDfac extends Parser implements Corrector {
   // algunos tienen primer ancho de columna 82 otros 68 (quiza incompletos, huecos)

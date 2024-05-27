@@ -1,19 +1,20 @@
 import { Corrector } from "./interface/Corrector";
-import { CorrectorFactory } from "./interface/CorrectorFactory";
-import { Parser } from "./Parser";
+import { Parser } from "./interface/Parser";
 
 export class ServicioCorreccion {
-  private correctorFactory: CorrectorFactory;
+  // no inyectar dependencia de Fabrica ya que siempre sera la misma fabrica de N algoritmos
+  private algoritmoCorreccion: Corrector & Parser;
 
-  constructor(correctorFactory: CorrectorFactory) {
-    this.correctorFactory = correctorFactory;
+  constructor(algoritmoCorreccion: Corrector & Parser) {
+    this.algoritmoCorreccion = algoritmoCorreccion;
   }
-  public corregir(contenido: string, nombreArchivo: string): string {
-    const corrector: Corrector & Parser =
-      this.correctorFactory.crearCorrector(nombreArchivo);
-    let matrixContenido: string[][] = corrector.parsearEntrada(contenido);
-    let matrixCorregida: string[][] = corrector.corregir(matrixContenido);
-    let contenidoSalida: string = corrector.parsearSalida(matrixCorregida);
+  public corregir(contenido: string): string {
+    let matrixContenido: string[][] =
+      this.algoritmoCorreccion.parsearEntrada(contenido);
+    let matrixCorregida: string[][] =
+      this.algoritmoCorreccion.corregir(matrixContenido);
+    let contenidoSalida: string =
+      this.algoritmoCorreccion.parsearSalida(matrixCorregida);
     return contenidoSalida;
   }
 }
