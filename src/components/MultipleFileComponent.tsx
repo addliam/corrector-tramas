@@ -7,6 +7,7 @@ import { calcularTipoAlgoritmo } from "../domain/corrector-tramas/CalcularTipoAl
 import { TipoAlgoritmo } from "../domain/corrector-tramas/interface/TipoAlgoritmo";
 import { Trama } from "../domain/corrector-tramas/interface/Trama";
 import TextAreaEditor from "./TextAreaEditor";
+import { Parsing } from "../domain/corrector-tramas/algoritmos/config/Parsing";
 interface FileItem {
   filename: string;
   content: string | ArrayBuffer | null;
@@ -16,6 +17,12 @@ export const MultipleFileComponent = () => {
   const [arrayFileItems, setArrayFileItems] = useState<FileItem[]>([]);
   // const [entradaTramas, setEntradaTramas] = useState<Trama[]>([]);
   const [salidaTramas, setSalidaTramas] = useState<Trama[]>([]);
+
+  {
+    /* Testeando otro metodo parseo */
+  }
+  const parsing: Parsing = new Parsing();
+  parsing.start();
 
   useEffect(() => {
     MainFilesHandler(arrayFileItems);
