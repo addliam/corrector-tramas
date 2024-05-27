@@ -1,5 +1,6 @@
 import { Corrector } from "./interface/Corrector";
 import { CorrectorFactory } from "./interface/CorrectorFactory";
+import { Parser } from "./Parser";
 
 export class ServicioCorreccion {
   private correctorFactory: CorrectorFactory;

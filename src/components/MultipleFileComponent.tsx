@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { ServicioCorreccion } from "../domain/corrector-tramas/ServicioCorreccion";
+import { CorrectorFactoryImpl } from "../domain/corrector-tramas/CorrectorFactoryImpl";
 
 interface FileItem {
   filename: string;
@@ -8,10 +10,37 @@ interface FileItem {
 const MainFilesHandler = (files: FileItem[]) => {
   // 1. Identificar tipo archivo (de los 4 o 5)
   // 2. Usar la funcion correspondiente por cada tipo archivo
+  // Recorrer los files para crear un corrector con algoritmo segun corresponda
+  files.map((file: FileItem) => {
+    let servicioCorreccion: ServicioCorreccion = new ServicioCorreccion(
+      new CorrectorFactoryImpl()
+    );
+    let contenidoCorregido: string = servicioCorreccion.corregir(
+      String(file.content),
+      file.filename
+    );
+    console.log("contenidoCorregido");
+    console.log(contenidoCorregido);
+    // let correctorFactory: CorrectorFactoryImpl = new CorrectorFactoryImpl();
+    // // la fabrica elige el corrector de acuerdo al nombre del archivo, osea el tipo
+    // let correctorEspecifico: Corrector = correctorFactory.crearCorrector(
+    //   file.filename
+    // );
+    // let servicioCorreccion: ServicioCorreccion = new ServicioCorreccion(correctorEspecifico);
+  });
 };
 
 export const MultipleFileComponent = () => {
   const [arrayFileItems, setArrayFileItems] = useState<FileItem[]>([]);
+
+  useEffect(() => {
+    // Mostrar informacion de archivos
+    // arrayFileItems.map((file: FileItem) => {
+    //   console.log(file.filename);
+    // });
+    MainFilesHandler(arrayFileItems);
+    return () => {};
+  }, [arrayFileItems]);
 
   const handleFileChosen = async (event: any) => {
     // Convert the FileList into an array and iterate
@@ -30,12 +59,8 @@ export const MultipleFileComponent = () => {
 
     // At this point you'll have an array of results
     let res: FileItem[] = await Promise.all(files);
+    // Guardar el array de files en estado arrayFileItems
     setArrayFileItems(res);
-
-    // Mostrar informacion de archivos
-    // res.map((file: FileItem) => {
-    //   console.log(file);
-    // });
   };
 
   return (

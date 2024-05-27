@@ -1,12 +1,16 @@
 import { Corrector } from "../interface/Corrector";
+import { Parser } from "../Parser";
+
 class AlgoritmoDden extends Parser implements Corrector {
-  offsetsEntrada = [1, 2, 3];
-  offsetsSalida = [10];
+  offsetsEntrada = [0];
+  offsetsSalida = [0];
   constructor() {
     super();
   }
   public corregir(contenido: string[][]): string[][] {
-    return [["a", "b"]];
+    // no ocurre nada en AlgoritmoDden
+    console.log("[+] corregir desde AlgoritmoDden");
+    return contenido;
   }
 }
 export default AlgoritmoDden;

@@ -1,12 +1,15 @@
 import { Corrector } from "../interface/Corrector";
+import { Parser } from "../Parser";
+
 class AlgoritmoDfar extends Parser implements Corrector {
-  offsetsEntrada = [1, 2, 3];
-  offsetsSalida = [10];
+  offsetsEntrada = [65];
+  offsetsSalida = [8, 12, 12, 12, 25];
   constructor() {
     super();
   }
   public corregir(contenido: string[][]): string[][] {
-    return [["a", "b"]];
+    console.log("[+] corregir desde AlgoritmoDfar");
+    return contenido;
   }
 }
 export default AlgoritmoDfar;
