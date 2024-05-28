@@ -1,13 +1,18 @@
 import { Corrector } from "../interface/Corrector";
-import { Parser } from "../interface/Parser";
+import { IParser } from "../interface/IParser";
 
-class AlgoritmoDfac extends Parser implements Corrector {
-  // algunos tienen primer ancho de columna 82 otros 68 (quiza incompletos, huecos)
-  offsetsEntrada = [82];
-  // 42 se va hasta la letra N
-  offsetsSalida = [12, 9, 12, 12, 12, 12, 12, 12, 12, 13, 42];
-  constructor() {
-    super();
+class AlgoritmoDfac implements IParser, Corrector {
+  private parser: IParser;
+
+  parsearEntrada(texto: string): string[][] {
+    return this.parser.parsearEntrada(texto);
+  }
+  parsearSalida(matrix: string[][]): string {
+    return this.parser.parsearSalida(matrix);
+  }
+
+  constructor(parser: IParser) {
+    this.parser = parser;
   }
   public corregir(contenido: string[][]): string[][] {
     console.log("[+] corregir desde AlgoritmoDfac");

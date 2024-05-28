@@ -1,13 +1,18 @@
 import { Corrector } from "../interface/Corrector";
-import { Parser } from "../interface/Parser";
+import { IParser } from "../interface/IParser";
 
-class AlgoritmoDser extends Parser implements Corrector {
-  offsetsEntrada = [50, 74];
-  // 74 similar a offsetSalida incluye ancho de columna mas espacios en blanco a la izquierda
-  // Excepcion signo negativo representa alineacion izq.
-  offsetsSalida = [-74, 15, 10, 12, 12, 12, 12, 12, 20];
-  constructor() {
-    super();
+class AlgoritmoDser implements IParser, Corrector {
+  private parser: IParser;
+
+  parsearEntrada(texto: string): string[][] {
+    return this.parser.parsearEntrada(texto);
+  }
+  parsearSalida(matrix: string[][]): string {
+    return this.parser.parsearSalida(matrix);
+  }
+
+  constructor(parser: IParser) {
+    this.parser = parser;
   }
   public corregir(contenido: string[][]): string[][] {
     console.log("[+] corregir desde AlgoritmoDser");

@@ -1,14 +1,18 @@
 import { Corrector } from "../interface/Corrector";
-import { Parser } from "../interface/Parser";
+import { IParser } from "../interface/IParser";
 
-class AlgoritmoDate extends Parser implements Corrector {
-  offsetsEntrada = [39];
-  offsetsSalida = [
-    10, 21, 22, 3, 22, 24, 6, 31, 10, 18, 34, 14, 12, 12, 12, 12, 12, 12, 12,
-    12, 12, 12, 12, 12, 12,
-  ];
-  constructor() {
-    super();
+class AlgoritmoDate implements IParser, Corrector {
+  private parser: IParser;
+
+  parsearEntrada(texto: string): string[][] {
+    return this.parser.parsearEntrada(texto);
+  }
+  parsearSalida(matrix: string[][]): string {
+    return this.parser.parsearSalida(matrix);
+  }
+
+  constructor(parser: IParser) {
+    this.parser = parser;
   }
   public corregir(contenido: string[][]): string[][] {
     console.log("[+] corregir desde AlgoritmoDate");

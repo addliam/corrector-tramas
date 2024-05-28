@@ -16,7 +16,7 @@ export const configDfac: ConfigTrama = {
   columnas: [
     { longitud: 82 },
     { longitud: 12 },
-    { longitud: 9, alineacion: "derecha" },
+    { longitud: 9},
     { longitud: 12 },
     { longitud: 12 },
     { longitud: 12 },

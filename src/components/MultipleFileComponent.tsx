@@ -2,12 +2,11 @@ import { useState, useEffect } from "react";
 import { ServicioCorreccion } from "../domain/corrector-tramas/ServicioCorreccion";
 // importacion algoritmos
 import { Corrector } from "../domain/corrector-tramas/interface/Corrector";
-import { Parser } from "../domain/corrector-tramas/interface/Parser";
 import { calcularTipoAlgoritmo } from "../domain/corrector-tramas/CalcularTipoAlgoritmo";
 import { TipoAlgoritmo } from "../domain/corrector-tramas/interface/TipoAlgoritmo";
 import { Trama } from "../domain/corrector-tramas/interface/Trama";
 import TextAreaEditor from "./TextAreaEditor";
-import { Parsing } from "../domain/corrector-tramas/algoritmos/config/Parsing";
+import { IParser } from "../domain/corrector-tramas/interface/IParser";
 interface FileItem {
   filename: string;
   content: string | ArrayBuffer | null;
@@ -20,9 +19,9 @@ export const MultipleFileComponent = () => {
 
   {
     /* Testeando otro metodo parseo */
+    // const parsing: Parsing = new Parsing();
+    // parsing.start();
   }
-  const parsing: Parsing = new Parsing();
-  parsing.start();
 
   useEffect(() => {
     MainFilesHandler(arrayFileItems);
@@ -37,25 +36,23 @@ export const MultipleFileComponent = () => {
   }, [salidaTramas]);
 
   const MainFilesHandler = (files: FileItem[]) => {
-    // 1. Identificar tipo archivo (de los 4 o 5)
-    // 2. Usar la funcion correspondiente por cada tipo archivo
+    // TODO: vaciar estado actual de state
     // Recorrer los files para crear un corrector con algoritmo segun corresponda
     files.map((file: FileItem) => {
       const tramaTipoyAlgoritmo: TipoAlgoritmo = calcularTipoAlgoritmo(
         file.filename
       );
       const tipoTrama: string = tramaTipoyAlgoritmo.tipo;
-      const algoritmoTrama: Corrector & Parser = tramaTipoyAlgoritmo.algoritmo;
+      const algoritmoTrama: Corrector & IParser = tramaTipoyAlgoritmo.algoritmo;
       const contenidoArchivoString: string = String(file.content);
       // Iniciar servicio correccion con algoritmo especifico
-      // apendizar a lista existente
       const servicioCorreccion = new ServicioCorreccion(algoritmoTrama);
-      const contenidoCorregido = servicioCorreccion.corregir(
+      const contenidoCorregido = servicioCorreccion.iniciar(
         contenidoArchivoString
       );
       console.log("contenidoCorregido: ");
       console.log(contenidoCorregido);
-      // Agregar trama a lista de tramas corregidas, osea salida
+      // Agregar trama a lista de tramas corregidas, osea state salida
       setSalidaTramas((prev) => [
         ...prev,
         {
