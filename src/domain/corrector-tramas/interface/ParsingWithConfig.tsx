@@ -4,6 +4,7 @@ import { ConfigTrama } from "./ConfigTrama";
  * Parsea el contenido de texto basado en una configuracion pasada en constructor.
  */
 export class ParsingWithConfig {
+  // TODO: mover de folder interface
   // configuracion de ancho de columnas y alineacion de contenido de tabla
   private config: ConfigTrama;
   constructor(config: ConfigTrama) {
