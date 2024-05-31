@@ -7,8 +7,8 @@ describe("ServicioCorrecion: Trama de tipo date", () => {
     let { contenidoCorregido, modeloSalida } = setupServicioCorrecion(
       AlgoritmoDate,
       configDate,
-      "./tests/tramas/entrada/date_20508790971_00008271_20001_0019964_202405_20240504.txt",
-      "./tests/tramas/salida/date_20508790971_00008271_20001_0019964_202405_20240504.txt",
+      "./tests/tramas/entrada/date_20508790971_00008271_40005_0019925_202405_20240503.txt",
+      "./tests/tramas/salida/date_20508790971_00008271_40005_0019925_202405_20240503.txt"
     );
     expect(contenidoCorregido).toEqual(modeloSalida);
   });
