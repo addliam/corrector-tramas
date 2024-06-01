@@ -9,10 +9,20 @@
 
   // These tasks can be run from CodeSandbox. Running one will open a log in the app.
   "tasks": {
+    "install": {
+      "name": "install",
+      "command": "npm run install",
+      "runAtStart": true
+    },
     "dev": {
       "name": "dev",
       "command": "npm run dev",
       "runAtStart": true
+    },
+    "test dfac": {
+      "name": "test dfac",
+      "command": "npm run test -d dfac",
+      "runAtStart": false
     },
     "build": {
       "name": "build",
