@@ -5,8 +5,8 @@ import { Corrector } from "../domain/corrector-tramas/interface/Corrector";
 import { calcularTipoAlgoritmo } from "../domain/corrector-tramas/CalcularTipoAlgoritmo";
 import { TipoAlgoritmo } from "../domain/corrector-tramas/interface/TipoAlgoritmo";
 import { Trama } from "../domain/corrector-tramas/interface/Trama";
-import TextAreaEditor from "./TextAreaEditor";
 import { IParser } from "../domain/corrector-tramas/interface/IParser";
+import VistasTramasComponent from "./VistasTramasComponent";
 interface FileItem {
   filename: string;
   content: string | ArrayBuffer | null;
@@ -16,12 +16,6 @@ export const MultipleFileComponent = () => {
   const [arrayFileItems, setArrayFileItems] = useState<FileItem[]>([]);
   // const [entradaTramas, setEntradaTramas] = useState<Trama[]>([]);
   const [salidaTramas, setSalidaTramas] = useState<Trama[]>([]);
-
-  {
-    /* Testeando otro metodo parseo */
-    // const parsing: Parsing = new Parsing();
-    // parsing.start();
-  }
 
   useEffect(() => {
     MainFilesHandler(arrayFileItems);
@@ -97,18 +91,8 @@ export const MultipleFileComponent = () => {
         onChange={(e) => handleFileChosen(e)}
       />
       <div id="mainbody">
-        {salidaTramas.length > 0 &&
-          salidaTramas.map((trama: Trama, indx: number) => (
-            <TextAreaEditor
-              key={`KEY-${indx}.${trama.nombreArchivo}`}
-              contenido={trama.contenido}
-              tipo={trama.tipo}
-              nombreArchivo={trama.nombreArchivo}
-            />
-          ))}
+        <VistasTramasComponent tramas={salidaTramas} />
       </div>
-      {/* O haces un componente grande, que necesites solo pasar salidaTramas state, 
-      O un state compartido de padre a hijo (callback) por cada tipo de trama */}
     </div>
   );
 };
