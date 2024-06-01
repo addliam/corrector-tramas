@@ -19,25 +19,40 @@
       "command": "npm run dev",
       "runAtStart": true
     },
+    "test date": {
+      "name": "test date",
+      "command": "npm run test -d date",
+      "runAtStart": false
+    },
     "test dfac": {
       "name": "test dfac",
       "command": "npm run test -d dfac",
       "runAtStart": false
     },
-    "build": {
-      "name": "build",
-      "command": "npm run build",
+    "test far": {
+      "name": "test far",
+      "command": "npm run test -d far",
       "runAtStart": false
     },
-    "lint": {
-      "name": "lint",
-      "command": "npm run lint",
-      "runAtStart": false
-    },
-    "preview": {
-      "name": "preview",
-      "command": "npm run preview",
+    "test dser": {
+      "name": "test dser",
+      "command": "npm run test -d dser",
       "runAtStart": false
     }
+    // "build": {
+    //   "name": "build",
+    //   "command": "npm run build",
+    //   "runAtStart": false
+    // },
+    // "lint": {
+    //   "name": "lint",
+    //   "command": "npm run lint",
+    //   "runAtStart": false
+    // },
+    // "preview": {
+    //   "name": "preview",
+    //   "command": "npm run preview",
+    //   "runAtStart": false
+    // }
   }
 }
