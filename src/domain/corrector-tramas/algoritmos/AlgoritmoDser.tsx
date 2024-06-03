@@ -16,6 +16,7 @@ class AlgoritmoDser implements IParser, Corrector {
   }
   public corregir(contenido: string[][]): string[][] {
     console.log("[+] corregir desde AlgoritmoDser");
+    console.log("MEMO O MEMO");
     return contenido;
   }
 }
