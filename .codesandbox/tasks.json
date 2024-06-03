@@ -11,7 +11,7 @@
   "tasks": {
     "install": {
       "name": "install",
-      "command": "npm run install",
+      "command": "npm install",
       "runAtStart": true
     },
     "dev": {
