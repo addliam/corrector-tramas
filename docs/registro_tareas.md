@@ -32,9 +32,9 @@ Estas tramas corresponden a la atención al cliente.
 
 ### Tareas
 
-| Tarea     | Descripción | Responsable          |
-| --------- | ----------- | -------------------- |
-| `tareaA1` | PENDIENTE:  | Nombre Responsable 1 |
+| Tarea     | Descripción | Responsable |
+| --------- | ----------- | ----------- |
+| `tareaA1` | PENDIENTE:  | Loyola      |
 
 ## Tramas Tipo Dfac
 
@@ -44,11 +44,11 @@ Estas tramas están relacionadas con la facturación.
 
 ### Tareas
 
-| Tarea     | Descripción                                                                                                  | Responsable          |
-| --------- | ------------------------------------------------------------------------------------------------------------ | -------------------- |
-| `tareaB1` | La suma de montos decimales menos el IGV de la penúltima columna debe ser igual al monto final               | Nombre Responsable 4 |
-| `tareaB2` | De no cumplirse lo anterior, se debe sumar lo necesario al monto decimal más bajo para llegar al monto final | Nombre Responsable 5 |
-| `tareaB3` | Identificar si es farmaco IGV (penúltima columna es 0.00) e intercambiar columnas 8 y 9                      | Nombre Responsable 5 |
+| Tarea     | Descripción                                                                                                  | Responsable |
+| --------- | ------------------------------------------------------------------------------------------------------------ | ----------- |
+| `tareaB2` | De no cumplirse lo anterior, se debe sumar lo necesario al monto decimal más bajo para llegar al monto final | Velazque    |
+| `tareaB3` | Identificar si es farmaco IGV (penúltima columna es 0.00) e intercambiar columnas 8 y 9                      | Velazque    |
+| `tareaB1` | La suma de montos decimales menos el IGV de la penúltima columna debe ser igual al monto final               | Velazque    |
 
 ## Tramas Tipo Dfar
 
@@ -58,11 +58,11 @@ Estas tramas están relacionadas con la farmacia.
 
 ### Tareas
 
-| Tarea     | Descripción                                                                             | Responsable          |
-| --------- | --------------------------------------------------------------------------------------- | -------------------- |
-| `tareaC1` | La columna M que está incompleta debe ser actualizada por una M que esté completa       | Nombre Responsable 7 |
-| `tareaC2` | Actualizar la columna M o I que acabe en [10, 09, 10, 000] por el valor de [15, 11, 12] | Nombre Responsable 9 |
-| `tareaC3` | La columna I que este completa debe ser actualizada por una I parcial que este correcta | Nombre Responsable 9 |
+| Tarea     | Descripción                                                                             | Responsable |
+| --------- | --------------------------------------------------------------------------------------- | ----------- |
+| `tareaC1` | La columna M que está incompleta debe ser actualizada por una M que esté completa       | Lizarraga   |
+| `tareaC2` | Actualizar la columna M o I que acabe en [10, 09, 10, 000] por el valor de [15, 11, 12] | Lizarraga   |
+| `tareaC3` | La columna I que este completa debe ser actualizada por una I parcial que este correcta | Lizarraga   |
 
 ## Tramas Tipo Dser
 
@@ -72,10 +72,10 @@ Estas tramas están relacionadas con el servicio.
 
 ### Tareas
 
-| Tarea     | Descripción                                               | Responsable          |
-| --------- | --------------------------------------------------------- | -------------------- |
-| `tareaD1` | Actualizar el código de Riesgo Quirúrgico (RQ) de 01 a 02 | Nombre Responsable X |
-| `tareaD2` | Actualizar el código de Diurna de 501 a 201               | Nombre Responsable Y |
+| Tarea     | Descripción                                               | Responsable |
+| --------- | --------------------------------------------------------- | ----------- |
+| `tareaD1` | Actualizar el código de Riesgo Quirúrgico (RQ) de 01 a 02 | Ocrospoma   |
+| `tareaD2` | Actualizar el código de Diurna de 501 a 201               | Ocrospoma   |
 
 ## Responsables
 
