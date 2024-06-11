@@ -61,7 +61,7 @@ Estas tramas están relacionadas con la farmacia.
 | Tarea     | Descripción                                                                             | Responsable |
 | --------- | --------------------------------------------------------------------------------------- | ----------- |
 | `tareaC1` | La columna M que está incompleta debe ser actualizada por una M que esté completa       | Lizarraga   |
-| `tareaC2` | Actualizar la columna M o I que acabe en [10, 09, 10, 000] por el valor de [15, 11, 12] | Lizarraga   |
+| `tareaC2` | Actualizar la columna I que acabe en [10, 09, 000] por algun valor de [15, 11, 12]      | Lizarraga   |
 | `tareaC3` | La columna I que este completa debe ser actualizada por una I parcial que este correcta | Lizarraga   |
 
 ## Tramas Tipo Dser
