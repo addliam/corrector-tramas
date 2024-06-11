@@ -7,10 +7,21 @@ interface VistasTramasComponentProps {
 }
 
 const VistasTramasComponent = ({ tramas }: VistasTramasComponentProps) => {
+  const downloadFile = (trama: Trama): void => {
+    const element = document.createElement("a");
+    const fileBlob = new Blob([trama.contenido], { type: "text/plain" });
+    element.href = URL.createObjectURL(fileBlob);
+    element.download = trama.nombreArchivo;
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+  };
   const descargarTramasAction = (): void => {
-    console.log(`Descargando tramas ...`);
     const cantidadTramas = tramas.length;
-    console.log(`Cantidad: ${cantidadTramas}`);
+    console.log(`Descargando tramas. Cantidad: ${cantidadTramas}`);
+    tramas.map((trama) => {
+      downloadFile(trama);
+    });
   };
   return (
     <>
