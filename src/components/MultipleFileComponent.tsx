@@ -21,13 +21,13 @@ export const MultipleFileComponent = () => {
     MainFilesHandler(arrayFileItems);
     return () => {};
   }, [arrayFileItems]);
-  useEffect(() => {
+  /*useEffect(() => {
     salidaTramas.map((salidaTrama: Trama) => {
       console.log({ salidaTrama });
     });
 
     return () => {};
-  }, [salidaTramas]);
+  }, [salidaTramas]);*/
 
   const MainFilesHandler = (files: FileItem[]) => {
     // TODO: vaciar estado actual de state
@@ -44,8 +44,6 @@ export const MultipleFileComponent = () => {
       const contenidoCorregido = servicioCorreccion.iniciar(
         contenidoArchivoString
       );
-      console.log("contenidoCorregido: ");
-      console.log(contenidoCorregido);
       // Agregar trama a lista de tramas corregidas, osea state salida
       setSalidaTramas((prev) => [
         ...prev,
