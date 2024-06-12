@@ -8,7 +8,7 @@ function App() {
   return (
     <>
       <div>
-        <h1>Corrector de Tramas</h1>
+        <h1 id="titulo-principal">Corrector de Tramas</h1>
       </div>
       <MultipleFileComponent />
       {/* <FileDroperComponent /> */}

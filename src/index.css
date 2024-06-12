@@ -1,3 +1,116 @@
-html {
-  background-color: blanchedalmond;
+:root {
+  --blanco-principal: #ffffff;
+  --blanco-claro: #f2f2f2;
+  --gris-oscuro: #222222;
+  --azul: #1e73be;
+  --morado-principal: #4a1162;
+  --gris-claro: #f9f9f9;
+  --gris-texto: #333333;
+  --verde-activo: #00ff00;
+  --naranja-principal: #f56e28;
+  --blanco-bala: #ffffff;
+}
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #ffffff;
+}
+h1#titulo-principal {
+  color: #4a1162;
+  text-align: center;
+}
+div.upload-expense {
+  margin-top: 2rem;
+  padding-inline: 1rem;
+}
+input#entrada-archivos-trama {
+  border: 2px dashed var(--naranja-principal);
+  height: 18rem;
+  width: 100%;
+  display: none;
+}
+label#btn-seleccionar-img {
+  border: 2px solid var(--naranja-principal);
+}
+/* copiado */
+.drag-area {
+  margin-inline: auto;
+  border: 3px dashed var(--naranja-principal);
+  height: 20rem;
+  width: 100%;
+  max-width: 70rem;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #ffece3;
+}
+
+.drag-area.active {
+  border: 2px solid #ffbe9e;
+}
+
+.drag-area .icon {
+  font-size: 100px;
+  color: #fff;
+  width: 64px;
+  height: 64px;
+  display: flex;
+  flex-direction: column;
+}
+
+.drag-area header {
+  font-size: 30px;
+  font-weight: 500;
+  padding-top: 1rem;
+  color: #3d3d3d;
+}
+
+.drag-area span {
+  font-size: 18px;
+  font-weight: 500;
+  color: #3d3d3d;
+  margin: 10px 0 15px 0;
+}
+
+.drag-area button {
+  padding: 10px 25px;
+  font-size: 20px;
+  font-weight: 500;
+  border: none;
+  outline: none;
+  background: var(--naranja-principal);
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.drag-area img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+.textarea-container h3 {
+  font-size: 1.25rem;
+}
+.textarea-container .tipo {
+  color: var(--azul);
+}
+.textarea-container .nombre-archivo {
+  color: var(--gris-texto);
+}
+div#contenedor-boton-descarga {
+  margin: 1rem 0;
+}
+button#btn-descargar-tramas {
+  color: #fff;
+  background-color: var(--naranja-principal);
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 10px 25px;
+  font-size: 18px;
+  font-weight: 500;
 }
