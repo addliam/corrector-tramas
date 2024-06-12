@@ -25,7 +25,7 @@ const TextAreaEditor: React.FC<TextAreaEditorProps> = ({
   };
 
   const handleContentChange = (
-    event: React.ChangeEvent<HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLTextAreaElement>,
   ) => {
     // cambiar contenido dynamico
     const value = event.target.value;
@@ -34,9 +34,11 @@ const TextAreaEditor: React.FC<TextAreaEditorProps> = ({
   };
 
   return (
-    <div>
+    <div className="textarea-container">
       <h3>
-        {tipo.toUpperCase()} - {nombreArchivo}
+        <span className="tipo">{tipo.toUpperCase()}</span>
+        <span className="separador">&nbsp;-&nbsp;</span>
+        <span className="nombre-archivo">{nombreArchivo}</span>
       </h3>
       <textarea
         style={{
@@ -47,6 +49,7 @@ const TextAreaEditor: React.FC<TextAreaEditorProps> = ({
           height: "auto",
         }}
         name={`textarea-${tipo}`}
+        wrap="off"
         id={`${tipo}`}
         cols={180}
         rows={rows}
