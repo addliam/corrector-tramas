@@ -34,30 +34,33 @@ export class ParsingWithConfig {
     return matrix
       .map((lineaArray: string[]) => {
         const alineacion_defecto = this.config.alineacion_defecto;
-        return lineaArray
-          .map((palabra: string, i: number) => {
-            const actualColumnConfig = this.config.columnas[i];
-            const configLongitud = actualColumnConfig.longitud;
-            const repeticionRelleno = configLongitud - palabra.length;
-            // si se definio la alineacion de cada columna, usar esa, de lo contrario usar la por defecto
-            const alineacionElegida = actualColumnConfig.alineacion
-              ? actualColumnConfig.alineacion
-              : alineacion_defecto;
-            let palabraRellenada = "";
-            // para el caso de derecha
-            if (alineacionElegida === "derecha") {
-              palabraRellenada = " ".repeat(repeticionRelleno) + palabra;
-            } else {
-              // izquierda
-              const configColumnEspacio = actualColumnConfig.espacio || 0;
-              palabraRellenada =
-                " ".repeat(configColumnEspacio) +
-                palabra +
-                " ".repeat(repeticionRelleno - configColumnEspacio);
-            }
-            return palabraRellenada;
-          })
-          .join("");
+        // comprobacion de longitud primera columna para evitar vacios ('') separados por espacios
+        if (lineaArray[0].length > 0) {
+          return lineaArray
+            .map((palabra: string, i: number) => {
+              const actualColumnConfig = this.config.columnas[i];
+              const configLongitud = actualColumnConfig.longitud;
+              const repeticionRelleno = configLongitud - palabra.length;
+              // si se definio la alineacion de cada columna, usar esa, de lo contrario usar la por defecto
+              const alineacionElegida = actualColumnConfig.alineacion
+                ? actualColumnConfig.alineacion
+                : alineacion_defecto;
+              let palabraRellenada = "";
+              // para el caso de derecha
+              if (alineacionElegida === "derecha") {
+                palabraRellenada = " ".repeat(repeticionRelleno) + palabra;
+              } else {
+                // izquierda
+                const configColumnEspacio = actualColumnConfig.espacio || 0;
+                palabraRellenada =
+                  " ".repeat(configColumnEspacio) +
+                  palabra +
+                  " ".repeat(repeticionRelleno - configColumnEspacio);
+              }
+              return palabraRellenada;
+            })
+            .join("");
+        }
       })
       .join("\n");
   }

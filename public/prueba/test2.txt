@@ -1,4 +1,0 @@
-CAMPO4  CAMPO5  CAMPO6
-v1  v2 v3
-v1  v2 v3
-v1  v2 v3

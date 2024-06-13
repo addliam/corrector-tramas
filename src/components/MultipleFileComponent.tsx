@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ServicioCorreccion } from "../domain/corrector-tramas/ServicioCorreccion";
 // importacion algoritmos
 import { Corrector } from "../domain/corrector-tramas/interface/Corrector";
@@ -16,25 +16,26 @@ export const MultipleFileComponent = () => {
   const [arrayFileItems, setArrayFileItems] = useState<FileItem[]>([]);
   // const [entradaTramas, setEntradaTramas] = useState<Trama[]>([]);
   const [salidaTramas, setSalidaTramas] = useState<Trama[]>([]);
-
+  // referencia a boton "Buscar archivos"
+  const inputRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
     MainFilesHandler(arrayFileItems);
     return () => {};
   }, [arrayFileItems]);
-  useEffect(() => {
+  /*useEffect(() => {
     salidaTramas.map((salidaTrama: Trama) => {
       console.log({ salidaTrama });
     });
 
     return () => {};
-  }, [salidaTramas]);
+  }, [salidaTramas]);*/
 
   const MainFilesHandler = (files: FileItem[]) => {
     // TODO: vaciar estado actual de state
     // Recorrer los files para crear un corrector con algoritmo segun corresponda
     files.map((file: FileItem) => {
       const tramaTipoyAlgoritmo: TipoAlgoritmo = calcularTipoAlgoritmo(
-        file.filename
+        file.filename,
       );
       const tipoTrama: string = tramaTipoyAlgoritmo.tipo;
       const algoritmoTrama: Corrector & IParser = tramaTipoyAlgoritmo.algoritmo;
@@ -42,10 +43,8 @@ export const MultipleFileComponent = () => {
       // Iniciar servicio correccion con algoritmo especifico
       const servicioCorreccion = new ServicioCorreccion(algoritmoTrama);
       const contenidoCorregido = servicioCorreccion.iniciar(
-        contenidoArchivoString
+        contenidoArchivoString,
       );
-      console.log("contenidoCorregido: ");
-      console.log(contenidoCorregido);
       // Agregar trama a lista de tramas corregidas, osea state salida
       setSalidaTramas((prev) => [
         ...prev,
@@ -72,24 +71,64 @@ export const MultipleFileComponent = () => {
         reader.readAsText(file);
       });
     });
-
     // At this point you'll have an array of results
     let res: FileItem[] = await Promise.all(files);
     // Guardar el array de files en estado arrayFileItems
     setArrayFileItems(res);
   };
 
+  const handleDropOnDragArea = async (
+    event: React.DragEvent<HTMLDivElement>,
+  ) => {
+    event.preventDefault();
+    event.stopPropagation();
+    let files = Array.from(event.dataTransfer.files).map((file: any) => {
+      let reader = new FileReader();
+      return new Promise<FileItem>((resolve) => {
+        reader.onload = () =>
+          resolve({ filename: file.name, content: reader.result });
+        reader.readAsText(file);
+      });
+    });
+    let res: FileItem[] = await Promise.all(files);
+    setArrayFileItems(res);
+  };
+  const handleDragOverOnDragArea = async (event: any) => {
+    event.preventDefault();
+  };
+  const handleButtonClick = () => {
+    inputRef.current?.click();
+  };
   return (
     <div className="upload-expense">
-      <input
-        style={{ height: "10rem", border: "2px solid red" }}
-        type="file"
-        multiple
-        id="file"
-        className="input-file"
-        accept=".txt"
-        onChange={(e) => handleFileChosen(e)}
-      />
+      <div
+        className="drag-area"
+        onDrop={handleDropOnDragArea}
+        onDragOver={handleDragOverOnDragArea}
+      >
+        <div className="icon">
+          <img
+            height="32px"
+            width="32px"
+            src="src/assets/icon-upload-f56e28.png"
+          />
+        </div>
+        <header>Arrastra y suelta para Subir Archivos</header>
+        <span>O</span>
+        <button onClick={handleButtonClick} id="buscar-archivos">
+          Buscar archivos
+        </button>
+        <input
+          ref={inputRef}
+          id="entrada-archivos-trama"
+          type="file"
+          multiple
+          onChange={(e) => handleFileChosen(e)}
+          className="input-file"
+          accept=".txt"
+          hidden
+        />
+      </div>
       <div id="mainbody">
         <VistasTramasComponent tramas={salidaTramas} />
       </div>
