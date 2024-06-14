@@ -16,7 +16,15 @@ class AlgoritmoDser implements IParser, Corrector {
   }
   public corregir(contenido: string[][]): string[][] {
     console.log("[+] corregir desde AlgoritmoDser");
-    console.log("MEMO O MEMO");
+    // Iterar sobre cada fila de la matriz de entrada
+    for (let i = 0; i < contenido.length; i++) {
+      // Obtener el detalle de la fila actual
+      let detalle = contenido[i][0];
+      detalle = detalle.replace("0303000501", "0303000201");
+      detalle = detalle.replace("0803230101", "0803230102");
+
+      contenido[i][0] = detalle;
+    }
     return contenido;
   }
 }
