@@ -76,7 +76,7 @@ export abstract class Parser {
           linea +=
             arrayLinea[i + 1] +
             " ".repeat(
-              absEspacioEntrePalabras - HARD_CODED - arrayLinea[i + 1].length
+              absEspacioEntrePalabras - HARD_CODED - arrayLinea[i + 1].length,
             );
           // saltearse ese index
           i++;
