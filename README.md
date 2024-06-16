@@ -2,11 +2,12 @@
 
 Ofrece el servicio de correccion de tramas DFAR, DFAC, DATE, DSER a traves de una interfaz web.
 
-**Versión actual:** 0.1.0
+**Versión actual:** 0.2.0
 
 ## Funcionalidades
 
 - Subida masiva de tramas en archivo de texto
+- Funcionalidad de correccion de los tipos de tramas
 
 ## Captura de ejecucion
 
