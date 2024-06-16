@@ -7,6 +7,8 @@ import { TipoAlgoritmo } from "../domain/corrector-tramas/interface/TipoAlgoritm
 import { Trama } from "../domain/corrector-tramas/interface/Trama";
 import { IParser } from "../domain/corrector-tramas/interface/IParser";
 import VistasTramasComponent from "./VistasTramasComponent";
+// icono
+import uploadIcon from "../assets/icon-upload-f56e28.png";
 interface FileItem {
   filename: string;
   content: string | ArrayBuffer | null;
@@ -113,11 +115,7 @@ export const MultipleFileComponent = () => {
         onDragOver={handleDragOverOnDragArea}
       >
         <div className="icon">
-          <img
-            height="32px"
-            width="32px"
-            src="src/assets/icon-upload-f56e28.png"
-          />
+          <img height="32px" width="32px" src={uploadIcon} />
         </div>
         <header>Arrastra y suelta para Subir Archivos</header>
         <span>O</span>
