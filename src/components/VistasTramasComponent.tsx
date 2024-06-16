@@ -1,4 +1,3 @@
-import React from "react";
 import { Trama } from "../domain/corrector-tramas/interface/Trama";
 import TextAreaEditor from "./TextAreaEditor";
 

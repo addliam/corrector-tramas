@@ -1,10 +1,6 @@
-import { useState } from "react";
 import { MultipleFileComponent } from "./components/MultipleFileComponent";
-import { FileDroperComponent } from "./components/FileDroperComponent";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
       <div>

@@ -31,7 +31,6 @@ export const MultipleFileComponent = () => {
   }, [salidaTramas]);*/
 
   const MainFilesHandler = (files: FileItem[]) => {
-    // TODO: vaciar estado actual de state
     // Recorrer los files para crear un corrector con algoritmo segun corresponda
     files.map((file: FileItem) => {
       const tramaTipoyAlgoritmo: TipoAlgoritmo = calcularTipoAlgoritmo(
@@ -58,6 +57,7 @@ export const MultipleFileComponent = () => {
   };
 
   const handleFileChosen = async (event: any) => {
+    // TODO: optimizar pedazo de codigo a traves de una funcion
     // Convert the FileList into an array and iterate
     let files = Array.from(event.target.files).map((file: any) => {
       // Define a new file reader
@@ -73,6 +73,9 @@ export const MultipleFileComponent = () => {
     });
     // At this point you'll have an array of results
     let res: FileItem[] = await Promise.all(files);
+    // limpiar state
+    setSalidaTramas([]);
+    setArrayFileItems([]);
     // Guardar el array de files en estado arrayFileItems
     setArrayFileItems(res);
   };
@@ -91,6 +94,9 @@ export const MultipleFileComponent = () => {
       });
     });
     let res: FileItem[] = await Promise.all(files);
+    // limpiar state
+    setSalidaTramas([]);
+    setArrayFileItems([]);
     setArrayFileItems(res);
   };
   const handleDragOverOnDragArea = async (event: any) => {
