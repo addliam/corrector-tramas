@@ -16,16 +16,20 @@ class AlgoritmoDser implements IParser, Corrector {
   }
   public corregir(contenido: string[][]): string[][] {
     console.log("[+] corregir desde AlgoritmoDser");
-    // Iterar sobre cada fila de la matriz de entrada
-    for (let i = 0; i < contenido.length; i++) {
-      // Obtener el detalle de la fila actual
-      let detalle = contenido[i][0];
-      detalle = detalle.replace("0303000501", "0303000201");
-      detalle = detalle.replace("0803230101", "0803230102");
-
-      contenido[i][0] = detalle;
-    }
-    return contenido;
+    return contenido.map((linea) => {
+      const segundaColumna = linea[1];
+      let nuevaPrimeraColumna = linea[0];
+      if (segundaColumna.includes("RIESGO QUIRURGICO,INCLUYE CONSULTA")) {
+        nuevaPrimeraColumna = `${nuevaPrimeraColumna.slice(0, -2)}02`;
+      } else if (
+        segundaColumna.includes(
+          "30 % DE LOS HONORARIOS DEL CIRUJANO - SALA DE OPERACIONES",
+        )
+      ) {
+        nuevaPrimeraColumna = `${nuevaPrimeraColumna.slice(0, -3)}201`;
+      }
+      return [nuevaPrimeraColumna, ...linea.slice(1)];
+    });
   }
 }
 export default AlgoritmoDser;
